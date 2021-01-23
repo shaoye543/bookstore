@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="store/header::head('朱博书店')">
+    <meta charset="UTF-8">
+
+
+</head>
+<body>
+<div th:replace="store/header::header-fragment"></div>
+
+<div th:replace="store/header::search-fragment"></div>
+
+<hr>
+<div id="wrapper">
+    <div class="container" id="bookcarousel">
+        <div class="row">
+            <div class="col-md-2" style="margin-right: -29px">
+                <div class="all-sort-list" style="height: 390px; width: 100%">
+                    <div th:each="category:${categories}" class="item">
+                        <span>·</span><a href="#" th:text="${category}"></a>
+                    </div>
+                    <div class="item">
+                        <span>·</span><a th:href="@{/index}">更多种类书籍</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-10">
+                <div id="myCarousel" style="height: 390px; width: 100%;" class="carousel slide">
+                    <!-- 轮播（Carousel）指标 -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#myCarousel" data-slide-to="1"></li>
+                        <li data-target="#myCarousel" data-slide-to="2"></li>
+                    </ol>
+                    <!-- 轮播（Carousel）项目 -->
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <img src="https://static.runoob.com/images/mix/img_fjords_wide.jpg" alt="First slide">
+                        </div>
+                        <div class="item">
+                            <img src="https://static.runoob.com/images/mix/img_nature_wide.jpg" alt="Second slide">
+                        </div>
+                        <div class="item">
+                            <img src="https://static.runoob.com/images/mix/img_mountains_wide.jpg" alt="Third slide">
+                        </div>
+                    </div>
+                    <!-- 轮播（Carousel）导航 -->
+                    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="newbooks" class="container">
+        <h3>新书上架 <a th:href="@{/index}" style="font-size: 15px; margin-left: 80%;text-decoration: none">更多书籍>> </a></h3>
+
+        <ul class="list-inline">
+            <th:block th:each="book:${books}">
+                <li class="list-inline-item">
+                    <img th:src="${book.picture}">
+                    <div id="bookname">
+                        <a style="color: black" th:text="'《'+${book.bookname}+'》'"></a>
+                    </div>
+                    <div id="bookauthor">
+                        <a style="color: #1b9dde" th:text="${book.author}+' '"></a><span>著</span>
+                    </div>
+                    <div id="bookprice">
+                        <p style="color: #1bc" th:text="'¥'+${book.price}"></p>
+                    </div>
+                </li>
+
+            </th:block>
+        </ul>
+    </div>
+
+    <div id="hotsales" class="container">
+        <h3>火热销售 <a th:href="@{/index}" style="font-size: 15px; margin-left: 80%;text-decoration: none">更多书籍>> </a></h3>
+        <ul class="list-inline">
+            <th:block th:each="book:${bestsales}">
+                <li class="list-inline-item">
+                    <img th:src="${book.picture}">
+                    <div id="sale_bookname">
+                        <a style="color: black" th:text="'《'+${book.bookname}+'》'"></a>
+                    </div>
+                    <div id="sale_bookauthor">
+                        <a style="color: #1b9dde" th:text="${book.author}+' '"></a><span>著</span>
+                    </div>
+                    <div id="sale_bookprice">
+                        <p style="color: #1bc" th:text="'￥'+${book.price}"></p>
+                    </div>
+                </li>
+            </th:block>
+        </ul>
+    </div>
+
+    <th:block th:if="${session.user != null}">
+        <style type="text/css">
+            #recommend ul li {
+                background-color: #fafafa;
+                width: 24.6%;
+                height: 387px;
+                border: 2px solid;
+                border-color: #ed1453 #fafafa #fafafa #fafafa;
+            }
+
+            #recommend ul li img {
+                margin-top: 3px;
+                width: 100%;
+                height: 76%
+            }
+
+            #recommend ul li #rec_bookname {
+                margin-top: 10px;
+                color: black;
+                font-size: 15px;
+                text-align: center;
+            }
+
+            #recommend ul li #rec_bookprice {
+                margin-top: 5px;
+                font-size: 15px;
+                text-align: center;
+            }
+
+            #recommend ul li #rec_bookauthor {
+                margin-top: 5px;
+                font-size: 15px;
+                text-align: center;
+            }
+
+            #recommend h3 {
+                font-weight: 620;
+                margin-left: 15px;
+            }
+        </style>
+        <!--<th:block th:if="${session}">-->
+        <div id="recommend" class="container">
+            <h3>为您推荐 <a style="font-size: 15px; margin-left: 80%">更多书籍>> </a></h3>
+            <ul class="list-inline">
+                <th:block th:each="book:${bestsales}">
+                    <li class="list-inline-item">
+                        <img th:src="${book.picture}">
+                        <div id="rec_bookname">
+                            <p style="color: black" th:text="'《'+${book.bookname}+'》'"></p>
+                        </div>
+                        <div id="rec_bookauthor">
+                            <a style="color: #1b9dde" th:text="${book.author}+' '"></a><span>著</span>
+                        </div>
+                        <div id="rec_bookprice">
+                            <p style="color: #1bc" th:text="'￥'+${book.price}"></p>
+                        </div>
+                    </li>
+                </th:block>
+            </ul>
+
+
+        </div>
+    </th:block>
+</div>
+
+<script type="text/javascript">
+    $(".carousel").carousel({
+        interval: 2000
+    })
+
+    $(".search_btn").click(function (e) {
+        var searchkey = $(".searchkey").val();
+        alert(searchkey);
+        window.location.href = "/search?searchkey=" + searchkey;
+    })
+</script>
+
+
+<div th:replace="store/footer::footer-fragment"></div>
+</body>
+</html>

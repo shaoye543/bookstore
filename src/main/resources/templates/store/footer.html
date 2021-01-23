@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!--    需要的css文件 -->
+    <!--    <link rel="stylesheet" href="../../static/css/footer.css">-->
+    <!--    <link rel="stylesheet" href="../../static/css/bootstrap.min.css">-->
+    <!--    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">-->
+
+</head>
+<body>
+
+<footer th:fragment="footer-fragment"
+        style="border-radius: 0; height: 310px; background-color: #333;margin-bottom: 0; margin-top: 15px;"
+        class="navbar">
+    <div class="container">
+        <div id="extra" class="row">
+            <div class="col-md-1">
+                <img id="cus_service" src="../../static/image/customer_service.jpeg"/>
+            </div>
+            <div id="service_tel" class="col-md-2">
+                <p>人工客服</p>
+                <p>877-877-8777</p>
+            </div>
+            <div id="help" class="col-md-2">
+                <dl>
+                    <dt>购物指南</dt>
+                    <dd><a href="#">购物流程</a></dd>
+                    <dd><a href="#">发票制度</a></dd>
+                    <dd><a href="#">服务协议</a></dd>
+                </dl>
+            </div>
+            <div id="pay" class="col-md-2">
+                <dl>
+                    <dt>支付方式</dt>
+                    <dd><a href="#">网上支付</a></dd>
+                    <dd><a href="#">银行转账</a></dd>
+                    <dd><a href="#">礼券支付</a></dd>
+                </dl>
+            </div>
+            <div id="follow" class="col-md-2">
+                <dl>
+                    <dt>关注我们</dt>
+                    <dd><a href="#">官方微信</a></dd>
+                    <dd><a href="#">新浪微博</a></dd>
+                    <dd><a href="#">联系我们</a></dd>
+                </dl>
+            </div>
+            <div id="about" class="col-md-2">
+                <dl>
+                    <dt>关于书城</dt>
+                    <dd><a href="#">了解书城</a></dd>
+                    <dd><a href="#">加入我们</a></dd>
+                    <dd><a href="#">捐赠维护</a></dd>
+                </dl>
+            </div>
+        </div>
+        <hr>
+        <div id="other" class="row">
+            <span style="margin-left: 35%;color: #ccc;font-size: 13px" href="#">朱博书店</span>
+            <a>|</a>
+            <a href="#">powered by shaoye</a>
+            <a>|</a>
+            <a href="#">QQ交流群：暂时没有</a>
+        </div>
+        <div>
+            <a style="color: #ccc; font-size: 13px; margin-left: 34.5%">Copyright 2021 ©bookstore.ltd 朱博书城. All Rights
+                Reserved</a>
+        </div>
+
+    </div>
+</footer>
+
+
+<script>
+    $(".carousel").carousel({
+        interval: 2000
+    })
+</script>
+</body>
+</html>

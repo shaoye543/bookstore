@@ -1,0 +1,60 @@
+.select {
+    min-height: 400px;
+}
+
+.select ul li {
+    margin-top: 10px;
+    height: 20px;
+}
+
+.select ul li a {
+    text-decoration: none;
+    color: black;
+}
+
+.select ul .active {
+    background-color: #00a1d6;
+    border-radius: 4px;
+}
+
+.select ul .active a {
+    color: white;
+    text-align: center;
+}
+
+#books li {
+    background-color: #fafafa;
+    width: 24.6%;
+    height: 387px;
+    border: 2px solid;
+    border-color: #1ce3c2 #fafafa #fafafa #fafafa;
+}
+#books li #book_img {
+    margin-top: 3px;
+    width: 100%;
+    height: 76%;
+}
+#books li #book_img img {
+    margin-top: 3px;
+    width: 100%;
+    height: 76%;
+}
+
+#books li #list_bookname {
+    margin-top: 10px;
+    color: black;
+    font-size: 15px;
+    text-align: center;
+}
+
+#books li #list_bookprice {
+    margin-top: 5px;
+    font-size: 15px;
+    text-align: center;
+}
+
+#books li #list_bookauthor {
+    margin-top: 5px;
+    font-size: 15px;
+    text-align: center;
+}

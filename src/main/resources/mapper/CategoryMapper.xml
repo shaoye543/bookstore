@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bookstore.mapper.CategoryMapper">
+    
+    <resultMap id="getBookTypeMap" type="java.util.HashMap">
+        <association property="category" javaType="com.bookstore.enity.Category">
+            <result property="key" column="categoryid"/>
+            <result property="value" column="category"/>
+        </association>
+    </resultMap>
+
+    <select id="getCategoryLimitNine" resultType="java.lang.String">
+        select category from category limit 9
+    </select>
+
+    <select id="getAllCategory" resultType="com.bookstore.enity.Category">
+        select categoryid, category from category
+    </select>
+
+    
+    <select id="">
+        select bookname from book where datediff(current_timestamp(),createtime) = 6
+    </select>
+
+</mapper>

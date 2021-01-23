@@ -1,0 +1,34 @@
+
+#extra {
+    margin-top: 40px;
+}
+
+#cus_service {
+    width: 54px;
+    height: 54px;
+    margin-top: 5px;
+}
+
+footer #extra #service_tel p {
+    font-size: 20px;
+    color: #ffffff;
+}
+
+footer #extra dl {
+    color: #ede5e5;
+}
+
+footer #extra dl dd {
+    margin-top: 10px;
+}
+
+footer #extra dl dd a {
+    font-size: 13px;
+    color: #ccc;
+}
+
+footer #other a {
+    font-size: 13px;
+    color: #ccc;
+    margin-left: 10px;
+}

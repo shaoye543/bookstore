@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(title)">
+    <meta charset="UTF-8">
+    <title th:text="${title}">朱博书店</title>
+    <script src="../../static/js/jquery.min.js"></script>
+    <script src="../../static/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../../static/css/book.css">
+    <link rel="stylesheet" href="../../static/css/index.css">
+    <link rel="stylesheet" href="../../static/css/header.css">
+    <link rel="stylesheet" href="../../static/css/footer.css">
+    <link rel="stylesheet" href="../../static/css/bootstrap.min.css">
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div th:fragment="header-fragment">
+    <nav style="background-color: #333;border-radius: 0" class="head navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <a style="color: white" class="navbar-brand" th:href="@{/}"> 朱博书店</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#">link1</a></li>
+                    <li><a href="#">link2</a></li>
+                    <li><a href="#">link3</a></li>
+                </ul>
+                <th:block th:if="${session.user == null}">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#">登录</a></li>
+                        <li><a href="#">注册</a></li>
+                    </ul>
+                </th:block>
+                <th:block th:if="${session.user != null}">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <th:block th:text="${session.user}"></th:block>
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">个人中心</a></li>
+                                <li><a href="#">我的订单</a></li>
+                                <li><a href="#">购物车</a></li>
+                                <li><a href="#">退出登录</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </th:block>
+            </div>
+        </div>
+    </nav>
+</div>
+<div th:fragment="search-fragment" style="margin-top: 30px;" class="container">
+    <div class="row">
+        <div class="logo col-md-3">
+            <img src="../../static/image/tittle.gif" alt="图标"/>
+        </div>
+        <div class="search col-md-8">
+<!--            <form>-->
+                <input class="searchkey" type="text" placeholder="请输入书籍或作者名称">
+                <button style="margin-bottom: 2px; width: 60px; height: 47px; font-size: 25px" type="submit"
+                        class="btn btn-primary fa search_btn">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
+<!--            </form>-->
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

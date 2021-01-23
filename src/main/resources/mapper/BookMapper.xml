@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bookstore.mapper.BookMapper">
+
+
+    <select id="getNewBooks" resultType="com.bookstore.enity.Book">
+        select *
+        from book
+        order by createtime desc limit 4
+    </select>
+
+    <select id="getBestSalesBooks" resultType="com.bookstore.enity.Book">
+        select *
+        from book
+        where bookid in (select good
+                         from record
+                         where datediff(current_timestamp(), time) &lt; 30
+                         group by good
+                         order by sum(number) desc) limit 8
+    </select>
+
+    <select id="getAllBooks" resultType="com.bookstore.enity.Book">
+        select *
+        from book
+    </select>
+
+    <select id="getBookByCategory" resultType="com.bookstore.enity.Book">
+        select * from book
+        <if test="categoryid != null">
+            where categoryid = #{categoryid}
+        </if>
+    </select>
+
+    <sql id="keywords">
+        <if test="searchkey != null">
+            AND bookname = #{searchkey}
+            or author = #{searchkey}
+        </if>
+        <if test="categoryid != null">
+            AND categoryid = #{categoryid}
+        </if>
+        <if test="price == 1">
+            AND price &gt; 0 and price &lt;= 10
+        </if>
+        <if test="price == 2">
+            AND price &gt; 10 and price &lt;= 20
+        </if>
+        <if test="price == 3">
+            AND price &gt; 20 and price &lt;= 50
+        </if>
+        <if test="price == 4">
+            AND price &gt; 50 and price &lt;= 100
+        </if>
+        <if test="price == 5">
+            AND price &gt; 100
+        </if>
+    </sql>
+
+    <select id="getBooksByKeywords" resultType="com.bookstore.enity.Book">
+        select * from book
+        <where>
+            <include refid="keywords"/>
+        </where>
+        <if test="order == 2">
+            order by price desc
+        </if>
+        <if test="order == 3">
+            order by price
+        </if>
+        <if test="order == 4">
+            order by createtime desc
+        </if>
+    </select>
+
+    <select id="getBooksByConsum" resultType="com.bookstore.enity.Book">
+        select book.bookid, book.bookname, book.author, book.picture, book.price, book.categoryid
+        from book,
+        record
+        where book.bookid = record.good
+        and record.opera = '购买'
+        <include refid="keywords"/>
+        group by record.good
+        order by sum(record.consum) desc
+    </select>
+
+</mapper>

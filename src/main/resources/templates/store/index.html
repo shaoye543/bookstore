@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="store/header::head('书籍索引—朱博书城')">
+    <meta charset="UTF-8">
+
+</head>
+<body>
+
+<div th:replace="store/header::header-fragment"></div>
+<div th:replace="store/header::search-fragment"></div>
+
+<hr>
+
+
+<div class="container select">
+    <ul class="list-inline book_order">
+        <th:block th:each="ordertype:${book_order_info}">
+            <li th:class="${order==ordertype.id}?'active':''">
+                <a href="#" th:value="${ordertype.id}" th:text="${ordertype.value}"></a>
+            </li>
+        </th:block>
+    </ul>
+    <ul class="list-inline price_area">
+        <th:block th:each="area:${price_area_info}">
+            <li th:class="${price==area.id}?'active':''">
+                <a href="#" th:value="${area.id}" th:text="${area.value}"></a>
+            </li>
+        </th:block>
+    </ul>
+    <ul class="list-inline book_type">
+        <li th:class="${type == 0} ? 'active' : ''">
+            <a th:value="0" href="#">全部分类</a>
+        </li>
+        <th:block th:each="category:${categories}">
+            <li th:class="${type==category.categoryid}?'active':''">
+                <a href="#" th:value="${category.categoryid}" th:text="${category.category}"></a>
+            </li>
+        </th:block>
+    </ul>
+    <hr>
+
+
+    <ul id="books" class="list-inline">
+        <th:block th:each="book:${pageinfo.list}">
+            <li class="list-inline-item">
+                <a id="book_img">
+                    <img th:src="${book.picture}"/>
+                </a>
+                <div id="list_bookname">
+                    <a th:text="'《'+${book.bookname}+'》'" style="color: black;text-decoration: none"></a>
+                </div>
+                <div id="list_bookauthor">
+                    <a th:text="${book.author}+' '" style="color: #1b9dde;"></a><span>著</span>
+                </div>
+                <div id="list_bookprice">
+                    <p th:text="'￥'+${book.price}" style="color: #1bc"></p>
+                </div>
+            </li>
+        </th:block>
+    </ul>
+
+    <div class="row" style="margin-top: 25px">
+        <!--分页文字信息  -->
+        <div style="margin-left: 44%;">
+            <p th:text="'当前'+${pageinfo.pageNum}+'页  共'+${pageinfo.pages}+'页  共'+ ${pageinfo.total}+'条记录'"></p>
+        </div>
+        <!-- 分页条信息 -->
+        <div style="margin-left: 45%">
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <li><a href="#">首页</a>
+                    </li>
+                    <th:block th:if="${pageinfo.hasPreviousPage}">
+                        <li>
+                            <a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+                        </li>
+                    </th:block>
+                    <th:block th:each="page_Num:${pageinfo.navigatepageNums}">
+                        <th:block th:if="${page_Num == pageinfo.pageNum }">
+                            <li class="active"><a th:text="${page_Num}" href="#"></a></li>
+                        </th:block>
+                        <th:block th:if="${page_Num != pageinfo.pageNum}">
+                            <li>
+                                <a href="#">${page_Num }</a>
+                            </li>
+                        </th:block>
+
+                    </th:block>
+                    <th:block th:if="${pageinfo.hasNextPage}">
+                        <li>
+                            <a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+                        </li>
+                    </th:block>
+                    <li>
+                        <a href="#">末页</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+</div>
+
+
+<div th:replace="store/footer::footer-fragment"></div>
+
+<script type="text/javascript">
+    var searchkey = $(".searchkey").val();
+    $(".book_order a").click(function (e) {
+        var order = $(this).attr("value");
+        var price = $(".price_area .active a").attr("value");
+        var type = $(".book_type .active a").attr("value");
+        window.location.href = "/search?category=" + type + "&price=" + price + "&order=" + order + "&searchkey=" + searchkey;
+    })
+    $(".price_area a").click(function (e) {
+        var order = $(".book_order .active a").attr("value");
+        var price = $(this).attr("value");
+        var type = $(".book_type .active a").attr("value");
+        window.location.href = "/search?category=" + type + "&price=" + price + "&order=" + order + "&searchkey=" + searchkey;
+    })
+    $(".book_type a").click(function (e) {
+        var order = $(".book_order .active a").attr("value");
+        var price = $(".price_area .active a").attr("value");
+        var type = $(this).attr("value");
+        window.location.href = "/search?category=" + type + "&price=" + price + "&order=" + order + "&searchkey=" + searchkey;
+    })
+</script>
+
+</body>
+</html>

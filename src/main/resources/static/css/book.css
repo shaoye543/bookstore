@@ -1,0 +1,66 @@
+#newbooks h3{
+    font-weight: 620;
+    margin-left: 15px;
+}
+#newbooks ul li{
+    background-color: #fafafa;
+    width: 24.6%;
+    height: 387px;
+    border: 2px solid;
+    border-color: #24d6d4 #fafafa #fafafa #fafafa;
+}
+#newbooks ul li img{
+    margin-top: 3px;
+    width: 100%;
+    height: 76%
+}
+#newbooks ul li #bookname{
+    margin-top: 10px;
+    color: black;
+    font-size: 15px;
+    text-align: center;
+}
+#newbooks ul li #bookprice{
+    margin-top: 5px;
+    font-size: 15px;
+    text-align: center;
+}
+#newbooks ul li #bookauthor{
+    margin-top: 5px;
+    font-size: 15px;
+    text-align: center;
+}
+
+
+#hotsales ul li{
+    background-color: #fafafa;
+    width: 24.6%;
+    height: 387px;
+    border: 2px solid;
+    border-color: #ed1453 #fafafa #fafafa #fafafa;
+}
+#hotsales ul li img{
+    margin-top: 3px;
+    width: 100%;
+    height: 76%
+}
+#hotsales ul li #sale_bookname{
+    margin-top: 10px;
+    color: black;
+    font-size: 15px;
+    text-align: center;
+}
+#hotsales ul li #sale_bookprice{
+    margin-top: 5px;
+    font-size: 15px;
+    text-align: center;
+}
+#hotsales ul li #sale_bookauthor{
+    margin-top: 5px;
+    font-size: 15px;
+    text-align: center;
+}
+#hotsales h3{
+    font-weight: 620;
+    margin-left: 15px;
+}
