@@ -47,6 +47,7 @@ public class BookIndexController {
         model.addAttribute("order", 0);
         model.addAttribute("price", 0);
         model.addAttribute("type", 0);
+        model.addAttribute("searchkey", null);
         return "store/index";
     }
 
@@ -80,7 +81,7 @@ public class BookIndexController {
         }
         //搜索关键字  爱要要 有没有无所谓
         if (!params.containsKey("searchkey") || params.get("searchkey").equals("0") || params.get("searchkey").isEmpty()) {
-            model.addAttribute("searchkey", 0);
+            model.addAttribute("searchkey", null);
         } else {
             searchkey = params.get("searchkey");
             model.addAttribute("searchkey", searchkey);

@@ -1,6 +1,7 @@
 package com.bookstore;
 
 import com.bookstore.common.PriceKeywords;
+import com.bookstore.enity.Book;
 import com.bookstore.mapper.BookMapper;
 import com.bookstore.service.BookService;
 import com.bookstore.service.CategoryService;
@@ -11,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
 import java.sql.SQLException;
+import java.util.List;
 
 @SpringBootTest
 class BookstoreApplicationTests {
@@ -26,11 +28,9 @@ class BookstoreApplicationTests {
 
     @Test
     void contextLoads() throws SQLException {
-        String test = "";
-//        System.out.println(TestEnum.ALL_TYPE.);
-        if ("".equals(test))
-            System.out.println("dsa");
-
+        List<Book> books = bookService.getBooksByKeywords("打赏", 1, 0, 1);
+        for (Book book : books)
+            System.out.println(book.toString());
     }
 
 }

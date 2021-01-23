@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import java.util.List;
 
 
@@ -21,7 +23,7 @@ public class StoreHomeController {
     @Autowired
     private BookService bookService;
 
-    @GetMapping(value = {"/home", "/", "home.html"})
+    @RequestMapping(value = {"/home", "/", "home.html"})
     public String storeHome(ModelMap model) {
         List<String> categories = categoryService.getCategoryLimitNine();
         List<Book> books = bookService.getNewBooks();

@@ -169,10 +169,8 @@
     $(".carousel").carousel({
         interval: 2000
     })
-
-    $(".search_btn").click(function (e) {
+    $("#search_btn").click(function (e) {
         var searchkey = $(".searchkey").val();
-        alert(searchkey);
         window.location.href = "/search?searchkey=" + searchkey;
     })
 </script>

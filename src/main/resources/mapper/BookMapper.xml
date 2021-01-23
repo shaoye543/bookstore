@@ -35,8 +35,8 @@
 
     <sql id="keywords">
         <if test="searchkey != null">
-            AND bookname = #{searchkey}
-            or author = #{searchkey}
+            AND (bookname = #{searchkey}
+            or author = #{searchkey})
         </if>
         <if test="categoryid != null">
             AND categoryid = #{categoryid}

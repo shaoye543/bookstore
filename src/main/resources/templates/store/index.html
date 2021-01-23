@@ -105,7 +105,12 @@
 <div th:replace="store/footer::footer-fragment"></div>
 
 <script type="text/javascript">
-    var searchkey = $(".searchkey").val();
+    //获取url中的参数  为搜索框设置搜索值
+    var searchkey = '[[${searchkey}]]';
+    var search = document.getElementById("search");
+    search.value = searchkey;
+
+    // var searchkey = $(".searchkey").val();
     $(".book_order a").click(function (e) {
         var order = $(this).attr("value");
         var price = $(".price_area .active a").attr("value");
@@ -123,6 +128,11 @@
         var price = $(".price_area .active a").attr("value");
         var type = $(this).attr("value");
         window.location.href = "/search?category=" + type + "&price=" + price + "&order=" + order + "&searchkey=" + searchkey;
+    })
+    $("#search_btn").click(function (e) {
+        var searchkey = $(".searchkey").val();
+        alert(searchkey);
+        window.location.href = "/search?searchkey=" + searchkey;
     })
 </script>
 
