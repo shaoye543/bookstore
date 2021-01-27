@@ -7,14 +7,13 @@ import com.bookstore.enity.Category;
 import com.bookstore.mapper.BookMapper;
 import com.bookstore.service.BookService;
 import com.bookstore.service.CategoryService;
-import com.bookstore.util.Constant;
+import com.bookstore.service.PressService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.github.pagehelper.util.StringUtil;
-import com.sun.deploy.util.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -28,17 +27,19 @@ public class BookIndexController {
     private CategoryService categoryService;
     @Resource
     private BookService bookService;
-
     @Resource
-    private BookMapper bookMapper;
+    private PressService pressService;
+
 
     //这俩其实可以放一块
     @RequestMapping(value = "/index")
     public String bookIndex(@RequestParam(value = "page", required = true, defaultValue = "1") Integer page,
                             ModelMap model) {
-        List<Book> books = bookService.getAllBooks();           //获取全部书籍信息
+
         List<Category> categories = categoryService.getAllCategory();     //获取所有书籍类型
-        PageHelper.startPage(page, 20);                        //每页展示20本书籍
+
+        PageHelper.startPage(page, 10);                        //每页展示20本书籍
+        List<Book> books = bookService.getAllBooks();           //获取全部书籍信息
         PageInfo<Book> pageInfo = new PageInfo<Book>(books);
         model.addAttribute("categories", categories);
         model.addAttribute("pageinfo", pageInfo);
@@ -90,12 +91,21 @@ public class BookIndexController {
         List<Book> books = bookService.getBooksByKeywords(searchkey, id, price, order);             //按类别查询的书籍
 
         List<Category> categories = categoryService.getAllCategory();     //获取所有书籍类型
-        PageHelper.startPage(page, 20);                          //每页展示20本书籍
+        PageHelper.startPage(page, 10);                          //每页展示20本书籍
         PageInfo<Book> pageInfo = new PageInfo<Book>(books);
         model.addAttribute("price_area_info", PriceKeywords.values());    //排序种类
         model.addAttribute("book_order_info", OrderKeywords.values());    //价格区间
         model.addAttribute("categories", categories);                //所有的书籍类型
         model.addAttribute("pageinfo", pageInfo);
         return "store/index";
+    }
+
+    @RequestMapping(value = "/book/{bookid}")
+    public String bookDetailInfo(@PathVariable("bookid") Integer bookid, ModelMap model) {
+        Book book = bookService.getBooksById(bookid);                    //书籍信息
+        String pressname = pressService.getPressnameById(book.getPressid());   //书籍的出版社名
+        model.addAttribute("book", book);
+        model.addAttribute("press", pressname);
+        return "store/book";
     }
 }

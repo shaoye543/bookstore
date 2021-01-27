@@ -1,0 +1,38 @@
+.book_bookpic{
+    height: 400px;
+}
+.book_info{
+    margin-top: 20px;
+    margin-left: 50px;
+    height: 500px;
+    background-color: #f0f0f0
+}
+.book_bookname{
+    font-weight: 700;
+}
+.book_bookremark{
+    height: 100px;
+}
+.book_bookprice{
+    margin-top: 20px;
+    font-size: 30px;
+    color: #1bc;
+    height: 50px;
+    margin-bottom: 20px;
+}
+#buy_number{
+    margin-bottom: 20px;
+    width: 60px;
+    height: 40px;
+    color: black
+}
+.book_btn{
+    height: 50px;
+    width: 156px;
+    border: none;
+    background: #1797be;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    margin-right: 40px;
+}

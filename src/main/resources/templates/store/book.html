@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="store/header::head('书籍信息')">
+    <meta charset="UTF-8">
+
+
+</head>
+<body>
+<div th:replace="store/header::header-fragment"></div>
+
+<div th:replace="store/header::search-fragment"></div>
+<hr>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4" style="margin-top: 20px">
+            <img class="book_bookpic" th:src="'/image/'+${book.picture}"/>
+        </div>
+
+        <div class="col-md-7 book_info">
+            <h3 class="book_bookname" th:text="${book.bookname}"></h3>
+            <p class="book_bookremark" th:text="${book.remarks}"></p>
+            <p><span>作者：</span><a th:text="${book.author}"></a></p>
+            <p><span>出版社：</span><a th:text="${press}"></a></p>
+            <p class="book_bookprice">¥<span th:text="${book.price}"></span></p>
+            <label for="buy_number">购买数量</label>
+            <input onblur="check()" type="number" id="buy_number" value="1"/>
+            <div>
+                <input class="book_btn" type="button" th:onclick="'javascript:purchase('+${book.bookid}+')'"
+                       value="立即购买">
+                <input class="book_btn" type="button" oncli3k="" value="加入购物车">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div th:replace="store/footer::footer-fragment"></div>
+
+</body>
+</html>

@@ -40,4 +40,9 @@ public class BookServiceImpl implements BookService {
         else
             return bookMapper.getBooksByKeywords(searchkey, categoryid, price, order);
     }
+
+    @Override
+    public Book getBooksById(Integer bookid) {
+        return bookMapper.getBooksById(bookid);
+    }
 }

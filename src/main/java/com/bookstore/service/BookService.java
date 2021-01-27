@@ -12,6 +12,8 @@ public interface BookService {
 
     public List<Book> getAllBooks();
 
-
     public List<Book> getBooksByKeywords(String searchkey, Integer categoryid, Integer price, Integer order);
+
+    public Book getBooksById(Integer bookid);
+
 }

@@ -10,8 +10,9 @@ spring:
     password: ming527669
     url: jdbc:mysql://localhost:3306/bookstore?useSSL=false&serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8
     driver-class-name: com.mysql.cj.jdbc.Driver
-  resources:
-    static-locations: file:D:/upload/,classpath:/resources/,classpath:/static/
+  thymeleaf:
+    cache: false
+
 
 mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml

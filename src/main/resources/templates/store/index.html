@@ -39,12 +39,11 @@
     </ul>
     <hr>
 
-
     <ul id="books" class="list-inline">
         <th:block th:each="book:${pageinfo.list}">
             <li class="list-inline-item">
-                <a id="book_img">
-                    <img th:src="${book.picture}"/>
+                <a th:href="@{'/book/'+${book.bookid}}" id="book_img">
+                    <img th:src="'/image/'+${book.picture}"/>
                 </a>
                 <div id="list_bookname">
                     <a th:text="'《'+${book.bookname}+'》'" style="color: black;text-decoration: none"></a>
@@ -68,8 +67,7 @@
         <div style="margin-left: 45%">
             <nav aria-label="Page navigation">
                 <ul class="pagination">
-                    <li><a href="#">首页</a>
-                    </li>
+                    <li><a href="#">首页</a></li>
                     <th:block th:if="${pageinfo.hasPreviousPage}">
                         <li>
                             <a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
@@ -81,7 +79,7 @@
                         </th:block>
                         <th:block th:if="${page_Num != pageinfo.pageNum}">
                             <li>
-                                <a href="#">${page_Num }</a>
+                                <a href="#" th:text="${page_Num}"></a>
                             </li>
                         </th:block>
 
@@ -92,7 +90,7 @@
                         </li>
                     </th:block>
                     <li>
-                        <a href="#">末页</a>
+                        <a th:href="">末页</a>
                     </li>
                 </ul>
             </nav>
@@ -131,7 +129,6 @@
     })
     $("#search_btn").click(function (e) {
         var searchkey = $(".searchkey").val();
-        alert(searchkey);
         window.location.href = "/search?searchkey=" + searchkey;
     })
 </script>

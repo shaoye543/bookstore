@@ -58,3 +58,8 @@
     font-size: 15px;
     text-align: center;
 }
+
+.stripe{
+    height: 50px;
+    background-color: #f0f0f0
+}

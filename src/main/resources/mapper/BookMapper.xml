@@ -85,4 +85,12 @@
         order by sum(record.consum) desc
     </select>
 
+
+    <select id="getBooksById" resultType="com.bookstore.enity.Book">
+        select * from book
+        <if test="bookid != null">
+            where bookid = #{bookid}
+        </if>
+    </select>
+
 </mapper>

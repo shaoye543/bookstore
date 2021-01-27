@@ -64,7 +64,9 @@
         <ul class="list-inline">
             <th:block th:each="book:${books}">
                 <li class="list-inline-item">
-                    <img th:src="${book.picture}">
+                    <a th:href="@{'/book/'+${book.bookid}}">
+                        <img th:src="'/image/'+${book.picture}">
+                    </a>
                     <div id="bookname">
                         <a style="color: black" th:text="'《'+${book.bookname}+'》'"></a>
                     </div>
@@ -85,7 +87,9 @@
         <ul class="list-inline">
             <th:block th:each="book:${bestsales}">
                 <li class="list-inline-item">
-                    <img th:src="${book.picture}">
+                    <a th:href="@{'/book/'+${book.bookid}}">
+                        <img th:src="'/image/'+${book.picture}">
+                    </a>
                     <div id="sale_bookname">
                         <a style="color: black" th:text="'《'+${book.bookname}+'》'"></a>
                     </div>
@@ -146,7 +150,9 @@
             <ul class="list-inline">
                 <th:block th:each="book:${bestsales}">
                     <li class="list-inline-item">
-                        <img th:src="${book.picture}">
+                        <a th:href="@{'/book/'+${book.bookid}}">
+                            <img th:src="'/image/'+${book.picture}">
+                        </a>
                         <div id="rec_bookname">
                             <p style="color: black" th:text="'《'+${book.bookname}+'》'"></p>
                         </div>

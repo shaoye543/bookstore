@@ -12,6 +12,8 @@ public class BookStoreWebMvcConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         //静态资源
         registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
+        //图片     url位置    实际存储位置
+        registry.addResourceHandler("/image/**").addResourceLocations("file:D:/upload/");
     }
 
     @Override
