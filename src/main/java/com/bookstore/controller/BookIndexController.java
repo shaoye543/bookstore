@@ -12,10 +12,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -30,68 +27,70 @@ public class BookIndexController {
     @Resource
     private PressService pressService;
 
+//
+//    //这俩其实可以放一块
+//    @RequestMapping(value = {"/index", "/search"})
+//    public String bookIndex(@RequestParam(value = "page", required = true, defaultValue = "1") Integer page,
+//                            Map<String, Object> params, ModelMap model) {
+//
+//        List<Category> categories = categoryService.getAllCategory();     //获取所有书籍类型
+//
+//        PageHelper.startPage(page, 10);                        //每页展示20本书籍
+//        List<Book> books = bookService.getAllBooks();           //获取全部书籍信息
+//        PageInfo<Book> pageInfo = new PageInfo<Book>(books);
+//        model.addAttribute("categories", categories);
+//        model.addAttribute("pageinfo", pageInfo);
+//        model.addAttribute("price_area_info", PriceKeywords.values());
+//        model.addAttribute("book_order_info", OrderKeywords.values());
+//        model.addAttribute("order", 0);
+//        model.addAttribute("price", 0);
+//        model.addAttribute("type", 0);
+//        model.addAttribute("searchkey", null);
+//        return "store/index";
+//    }
 
-    //这俩其实可以放一块
-    @RequestMapping(value = "/index")
-    public String bookIndex(@RequestParam(value = "page", required = true, defaultValue = "1") Integer page,
-                            ModelMap model) {
-
-        List<Category> categories = categoryService.getAllCategory();     //获取所有书籍类型
-
-        PageHelper.startPage(page, 10);                        //每页展示20本书籍
-        List<Book> books = bookService.getAllBooks();           //获取全部书籍信息
-        PageInfo<Book> pageInfo = new PageInfo<Book>(books);
-        model.addAttribute("categories", categories);
-        model.addAttribute("pageinfo", pageInfo);
-        model.addAttribute("price_area_info", PriceKeywords.values());
-        model.addAttribute("book_order_info", OrderKeywords.values());
-        model.addAttribute("order", 0);
-        model.addAttribute("price", 0);
-        model.addAttribute("type", 0);
-        model.addAttribute("searchkey", null);
-        return "store/index";
-    }
-
-    @GetMapping(value = "/search")
+    @RequestMapping(value = {"/index", "/search"})
     public String bookSearch(@RequestParam Map<String, String> params, ModelMap model,
                              @RequestParam(value = "page", required = true, defaultValue = "1") Integer page) {
-        Integer id = null;
-        Integer price = null;
-        Integer order = null;
-        String searchkey = null;
+
+        Integer id = null;                //书籍种类
+        Integer price = null;              //价格区间
+        Integer order = null;              //排序方式
+        String searchkey = null;          //搜索的关键字
         //书籍类型属性 供前端回显
-        if (!params.containsKey("category") || params.get("category").equals("0") || params.get("category").isEmpty()) {
+        if (!params.containsKey("category") || params.get("category").isEmpty()) {
             model.addAttribute("type", 0);
         } else {
             id = Integer.parseInt(params.get("category"));
             model.addAttribute("type", id);
         }
         //价格区间属性 供前端回显
-        if (!params.containsKey("price") || params.get("price").equals("0") || params.get("price").isEmpty()) {
+        if (!params.containsKey("price") || params.get("price").isEmpty()) {
             model.addAttribute("price", 0);
         } else {
-            price = Integer.parseInt(params.get("price"));
+            price = PriceKeywords.getIdByValue(params.get("price"));
             model.addAttribute("price", price);
         }
         //排序选择 供前端回显
-        if (!params.containsKey("order") || params.get("order").equals("0") || params.get("order").isEmpty()) {
+        if (!params.containsKey("order") || params.get("order").isEmpty()) {
             model.addAttribute("order", 0);
         } else {
-            order = Integer.parseInt(params.get("order"));
+            order = OrderKeywords.getIdByValue(params.get("order"));
             model.addAttribute("order", order);
         }
         //搜索关键字  爱要要 有没有无所谓
-        if (!params.containsKey("searchkey") || params.get("searchkey").equals("0") || params.get("searchkey").isEmpty()) {
+        if (!params.containsKey("searchkey") || params.get("searchkey").isEmpty()) {
             model.addAttribute("searchkey", null);
         } else {
             searchkey = params.get("searchkey");
             model.addAttribute("searchkey", searchkey);
         }
 
-        List<Book> books = bookService.getBooksByKeywords(searchkey, id, price, order);             //按类别查询的书籍
-
         List<Category> categories = categoryService.getAllCategory();     //获取所有书籍类型
-        PageHelper.startPage(page, 10);                          //每页展示20本书籍
+
+
+        PageHelper.startPage(page, 20);                          //每页展示20本书籍
+        List<Book> books = bookService.getBooksByKeywords(searchkey, id, price, order);             //按类别查询的书籍
         PageInfo<Book> pageInfo = new PageInfo<Book>(books);
         model.addAttribute("price_area_info", PriceKeywords.values());    //排序种类
         model.addAttribute("book_order_info", OrderKeywords.values());    //价格区间

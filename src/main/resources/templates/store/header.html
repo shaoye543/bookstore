@@ -3,8 +3,8 @@
 <head th:fragment="head(title)">
     <meta charset="UTF-8">
     <title th:text="${title}">朱博书店</title>
-    <script src="../../static/js/store/book.js"></script>
     <script src="../../static/js/jquery.min.js"></script>
+    <script src="../../static/js/store/book.js"></script>
     <script src="../../static/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="../../static/css/store/home.css">
     <link rel="stylesheet" href="../../static/css/store/index.css">
@@ -30,7 +30,7 @@
                 </ul>
                 <th:block th:if="${session.user == null}">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">登录</a></li>
+                        <li><a th:href="@{/tologin}">登录</a></li>
                         <li><a href="#">注册</a></li>
                     </ul>
                 </th:block>
@@ -38,14 +38,14 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <th:block th:text="${session.user}"></th:block>
+                                <th:block th:text="${session.user.nickname}"></th:block>
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="#">个人中心</a></li>
                                 <li><a href="#">我的订单</a></li>
                                 <li><a href="#">购物车</a></li>
-                                <li><a href="#">退出登录</a></li>
+                                <li><a th:href="@{/logout}">退出登录</a></li>
                             </ul>
                         </li>
                     </ul>

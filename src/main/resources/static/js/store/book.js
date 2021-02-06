@@ -9,5 +9,5 @@ function check() {
 
 function purchase(book) {
     var number = document.getElementById("buy_number").value;
-    window.location.href = "/purchase?" + number;
+    window.location.href = "/purchase/" + number;
 }

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="store/header::head('登录')">
+    <meta charset="UTF-8">
+
+</head>
+<body>
+
+
+<div style="width: 480px; height: 600px; position: absolute; top: 20%; left: 33%;" class="container">
+    <div class="jumbotron">
+        <form th:action="@{/login}" method="post">
+            <label for="account">账号</label>
+            <input type="text" name="account" id="account" class="form-control input-block">
+
+            <label for="password">密码</label>
+            <input type="password" name="password" id="password" class="form-control input-block">
+            <select style="margin-top: 15px;" name="identify" id="identify">
+                <option value="普通用户">普通用户</option>
+                <option value="管理员">管理员</option>
+            </select>
+            <input type="submit" name="commit" value="登录" class="btn btn-primary btn-block"
+                   data-disable-with="Signing in…" style="margin-top: 15px;">
+            <a href="#" id="register" class="btn btn-primary btn-block"
+               data-disable-with="Signing up…" style="margin-top: 15px;">注册</a>
+        </form>
+        <div style="text-align: center; margin-top: 15px">
+            <a th:href="@{/}">进入书店</a>
+        </div>
+        <div style="text-align: center; color: red; margin-top: 10px">
+            <th:block th:text="${error}"></th:block>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

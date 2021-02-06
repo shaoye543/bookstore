@@ -38,22 +38,22 @@
             AND (bookname = #{searchkey}
             or author = #{searchkey})
         </if>
-        <if test="categoryid != null">
+        <if test="categoryid != null and categoryid != 0">
             AND categoryid = #{categoryid}
         </if>
-        <if test="price == 1">
+        <if test="pricetype == 1">
             AND price &gt; 0 and price &lt;= 10
         </if>
-        <if test="price == 2">
+        <if test="pricetype == 2">
             AND price &gt; 10 and price &lt;= 20
         </if>
-        <if test="price == 3">
+        <if test="pricetype == 3">
             AND price &gt; 20 and price &lt;= 50
         </if>
-        <if test="price == 4">
+        <if test="pricetype == 4">
             AND price &gt; 50 and price &lt;= 100
         </if>
-        <if test="price == 5">
+        <if test="pricetype == 5">
             AND price &gt; 100
         </if>
     </sql>
@@ -63,13 +63,13 @@
         <where>
             <include refid="keywords"/>
         </where>
-        <if test="order == 2">
+        <if test="ordertype == 2">
             order by price desc
         </if>
-        <if test="order == 3">
+        <if test="ordertype == 3">
             order by price
         </if>
-        <if test="order == 4">
+        <if test="ordertype == 4">
             order by createtime desc
         </if>
     </select>

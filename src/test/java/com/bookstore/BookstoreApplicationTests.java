@@ -28,7 +28,7 @@ class BookstoreApplicationTests {
 
     @Test
     void contextLoads() throws SQLException {
-        List<Book> books = bookService.getBooksByKeywords("打赏", 1, 0, 1);
+        List<Book> books = bookService.getBooksByKeywords(null, 0, 0, 0);
         for (Book book : books)
             System.out.println(book.toString());
     }

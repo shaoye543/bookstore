@@ -21,10 +21,13 @@ public interface BookMapper {
     public List<Book> getAllBooks();
 
 
-    //按关键字检索 两个同属一个单元 为方便拆分为两个函数
-    public List<Book> getBooksByKeywords(@Param("searchkey") String searchkey, @Param("categoryid") Integer categoryid, Integer price, Integer order);
+    //按关键字检索    这里的pricetype代表的是一定的价格区间 同样的ordertype代表一种排序方式
+    public List<Book> getBooksByKeywords(@Param("searchkey") String searchkey, @Param("categoryid") Integer categoryid, Integer pricetype,
+                                         Integer ordertype);
 
-    public List<Book> getBooksByConsum(@Param("searchkey") String searchkey, @Param("categoryid") Integer categoryid, Integer price);
+    //按销售量   参数同上 这里未有ordertype因为涉及到另外一张表
+    public List<Book> getBooksByConsum(@Param("searchkey") String searchkey, @Param("categoryid") Integer categoryid, Integer pricetype);
 
+    //按书籍编号查询书籍信息
     public Book getBooksById(Integer bookid);
 }

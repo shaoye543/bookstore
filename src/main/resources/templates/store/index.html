@@ -5,7 +5,6 @@
 
 </head>
 <body>
-
 <div th:replace="store/header::header-fragment"></div>
 <div th:replace="store/header::search-fragment"></div>
 
@@ -16,14 +15,14 @@
     <ul class="list-inline book_order">
         <th:block th:each="ordertype:${book_order_info}">
             <li th:class="${order==ordertype.id}?'active':''">
-                <a href="#" th:value="${ordertype.id}" th:text="${ordertype.value}"></a>
+                <a href="#" th:text="${ordertype.value}"></a>
             </li>
         </th:block>
     </ul>
     <ul class="list-inline price_area">
         <th:block th:each="area:${price_area_info}">
             <li th:class="${price==area.id}?'active':''">
-                <a href="#" th:value="${area.id}" th:text="${area.value}"></a>
+                <a href="#" th:text="${area.value}"></a>
             </li>
         </th:block>
     </ul>
@@ -67,30 +66,30 @@
         <div style="margin-left: 45%">
             <nav aria-label="Page navigation">
                 <ul class="pagination">
-                    <li><a href="#">首页</a></li>
-                    <th:block th:if="${pageinfo.hasPreviousPage}">
-                        <li>
-                            <a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
-                        </li>
-                    </th:block>
+                    <li><a href="#" th:value="1">首页</a></li>
+<!--                    <th:block th:if="${pageinfo.hasPreviousPage}">-->
+<!--                        <li>-->
+<!--                            <a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>-->
+<!--                        </li>-->
+<!--                    </th:block>-->
                     <th:block th:each="page_Num:${pageinfo.navigatepageNums}">
                         <th:block th:if="${page_Num == pageinfo.pageNum }">
-                            <li class="active"><a th:text="${page_Num}" href="#"></a></li>
+                            <li class="active"><a th:value="${page_Num}" th:text="${page_Num}" href="#"></a></li>
                         </th:block>
                         <th:block th:if="${page_Num != pageinfo.pageNum}">
                             <li>
-                                <a href="#" th:text="${page_Num}"></a>
+                                <a href="#" th:value="${page_Num}" th:text="${page_Num}"></a>
                             </li>
                         </th:block>
 
                     </th:block>
-                    <th:block th:if="${pageinfo.hasNextPage}">
-                        <li>
-                            <a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
-                        </li>
-                    </th:block>
+<!--                    <th:block th:if="${pageinfo.hasNextPage}">-->
+<!--                        <li>-->
+<!--                            <a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>-->
+<!--                        </li>-->
+<!--                    </th:block>-->
                     <li>
-                        <a th:href="">末页</a>
+                        <a href="#" th:value="${pageinfo.pages}">末页</a>
                     </li>
                 </ul>
             </nav>
@@ -102,36 +101,10 @@
 
 <div th:replace="store/footer::footer-fragment"></div>
 
+<script th:src="@{../../static/js/store/index.js}"></script>
 <script type="text/javascript">
-    //获取url中的参数  为搜索框设置搜索值
     var searchkey = '[[${searchkey}]]';
-    var search = document.getElementById("search");
-    search.value = searchkey;
-
-    // var searchkey = $(".searchkey").val();
-    $(".book_order a").click(function (e) {
-        var order = $(this).attr("value");
-        var price = $(".price_area .active a").attr("value");
-        var type = $(".book_type .active a").attr("value");
-        window.location.href = "/search?category=" + type + "&price=" + price + "&order=" + order + "&searchkey=" + searchkey;
-    })
-    $(".price_area a").click(function (e) {
-        var order = $(".book_order .active a").attr("value");
-        var price = $(this).attr("value");
-        var type = $(".book_type .active a").attr("value");
-        window.location.href = "/search?category=" + type + "&price=" + price + "&order=" + order + "&searchkey=" + searchkey;
-    })
-    $(".book_type a").click(function (e) {
-        var order = $(".book_order .active a").attr("value");
-        var price = $(".price_area .active a").attr("value");
-        var type = $(this).attr("value");
-        window.location.href = "/search?category=" + type + "&price=" + price + "&order=" + order + "&searchkey=" + searchkey;
-    })
-    $("#search_btn").click(function (e) {
-        var searchkey = $(".searchkey").val();
-        window.location.href = "/search?searchkey=" + searchkey;
-    })
+    document.getElementById("search").value = searchkey;
 </script>
-
 </body>
 </html>
